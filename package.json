@@ -1,0 +1,7 @@
+{
+  "name": "twd-clean-architecture-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dev Theofanes <devtheofanes@gmail.com>",
+  "license": "MIT"
+}
