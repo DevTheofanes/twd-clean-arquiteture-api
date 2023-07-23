@@ -1,0 +1,4 @@
+API Requirements
+
+1. Register the user on mailing service list
+2. Send e-mail for user with bonus
