@@ -22,4 +22,15 @@ describe('In memory User repository', () => {
 
     expect(user?.name).toBe(name)
   })
+
+  test('should return all users in the repository', async () => {
+    const users: UserData[] = [
+      { name: 'any_name', email: 'any@mail.com' },
+      { name: 'second_name', email: 'second@mail.com' }
+    ]
+    const userRepo = new InMemoryUserRepository(users)
+
+    const allUsers = await userRepo.findAllUsers()
+    expect(allUsers).toHaveLength(2)
+  })
 })
