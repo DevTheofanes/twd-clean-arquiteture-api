@@ -46,8 +46,28 @@ describe('Email validation', () => {
     expect(Email.validate(email)).toBeFalsy()
   })
 
-  test('should not accept domain with a part larger than 63 chars', () => {
-    const email = 'local@' + 'd'.repeat(63) + '.com'
+  test.only('should not accept domain with a part larger than 63 chars', () => {
+    const email = 'local@' + 'd'.repeat(64) + '.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+
+  test('should not accept local part with invalid char', () => {
+    const email = 'local @mail.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+
+  test('should not accept local part with two dots', () => {
+    const email = 'lo..cal@mail.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+
+  test('should not accept local part with ending dot', () => {
+    const email = 'local.@mail.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+
+  test('should not accept email without an at-sign', () => {
+    const email = 'localmail.com'
     expect(Email.validate(email)).toBeFalsy()
   })
 })
