@@ -36,7 +36,7 @@ describe('Email validation', () => {
     expect(Email.validate(email)).toBeFalsy()
   })
 
-  test('should not accept when local is empty', () => {
+  test('should not accept when local part is empty', () => {
     const email = '@email.com'
     expect(Email.validate(email)).toBeFalsy()
   })
