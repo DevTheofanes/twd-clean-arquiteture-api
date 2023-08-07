@@ -8,11 +8,11 @@ export class Email {
   }
 
   static create (email: string): Either<InvalidEmailError, Email> {
-    if (Email.validate(email)) {
-      return right(new Email(email))
+    if (!Email.validate(email)) {
+      return left(new InvalidEmailError())
     }
 
-    return left(new InvalidEmailError())
+    return right(new Email(email))
   }
 
   static validate (email?: string | null): boolean {

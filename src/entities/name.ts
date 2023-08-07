@@ -8,11 +8,11 @@ export class Name {
   }
 
   public static create (name: string): Either<InvalidNameError, Name> {
-    if (Name.validate(name)) {
-      return right(new Name(name))
+    if (!Name.validate(name)) {
+      return left(new InvalidNameError())
     }
 
-    return left(new InvalidNameError())
+    return right(new Name(name))
   }
 
   public static validate (name?: string | null): boolean {
