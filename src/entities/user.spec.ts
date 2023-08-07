@@ -1,5 +1,6 @@
 import { left } from '../shared/either'
 import { InvalidEmailError } from './errors/invalid-email-error'
+import { InvalidNameError } from './errors/invalid-name-error'
 import { User } from './user'
 
 describe('User domain entity', () => {
@@ -8,5 +9,19 @@ describe('User domain entity', () => {
     const userError = User.create({ name: 'any name', email: invalidEmail })
 
     expect(userError).toEqual(left(new InvalidEmailError()))
+  })
+
+  test('should not create user with invalid name (to few characters)', () => {
+    const invalidName = 'O             '
+    const userError = User.create({ name: invalidName, email: 'any@valid.mail' })
+
+    expect(userError).toEqual(left(new InvalidNameError()))
+  })
+
+  test('should not create user with invalid name (to many characters)', () => {
+    const invalidName = 'O'.repeat(256)
+    const userError = User.create({ name: invalidName, email: 'any@valid.mail' })
+
+    expect(userError).toEqual(left(new InvalidNameError()))
   })
 })
